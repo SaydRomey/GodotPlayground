@@ -1,0 +1,23 @@
+import os
+
+env = Environment()
+env['CXX'] = 'g++'
+env.Append(CXXFLAGS=['-std=c++17', '-g', '-fPIC'])
+
+GODOT_CPP = '../godot-cpp'
+env.Append(CPPPATH=[
+    f"{GODOT_CPP}/godot-headers",
+    f"{GODOT_CPP}/include",
+    f"{GODOT_CPP}/gen/include",
+	f"{GODOT_CPP}/gdextension"
+])
+env.Append(LIBPATH=[f"{GODOT_CPP}/bin"])
+# env.Append(LINKFLAGS=[f"{GODOT_CPP}/bin/libgodot-cpp.linux.template_debug.x86_64.a"])
+env.Append(LINKFLAGS=[
+    '-Wl,--whole-archive',
+    f"{GODOT_CPP}/bin/libgodot-cpp.linux.template_debug.x86_64.a",
+    '-Wl,--no-whole-archive'
+])
+
+sources = Glob("*.cpp")
+env.SharedLibrary("mynative", sources)

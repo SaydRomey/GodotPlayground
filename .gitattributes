@@ -1,0 +1,6 @@
+# Normalize EOL for all files that Git considers text files.
+* text=auto eol=lf
+
+# # Enforce diff/merge rules for .gd or .tscn files.
+# *.gd text eol=lf
+# *.tscn text eol=lf

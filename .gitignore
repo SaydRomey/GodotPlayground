@@ -14,3 +14,26 @@ export_credentials.cfg
 .mono/
 data_*/
 mono_crash.*.json
+
+# Editor configs
+.vscode
+
+# Build artifacts
+*.o
+*.os
+*.a
+*.so
+!.so  # Allow override below
+
+# Keep only the intended .so (adjust path as needed)
+!/common/cpp/mynative/libmynative.so
+
+# SCons build metadata
+.sconsign.dblite
+
+# Temporary files and directories
+**/tmp/
+tmp*
+
+# Environment variables file
+.env

@@ -1,0 +1,3 @@
+[submodule "common/cpp/godot-cpp"]
+	path = common/cpp/godot-cpp
+	url = https://github.com/SaydRomey/godot-cpp
