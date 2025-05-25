@@ -1,0 +1,6 @@
+[configuration]
+entry_symbol = "{{MODULE_NAME}}_init"
+compatibility_minimum = "4.2"
+
+[libraries]
+linux.x86_64 = "res://native/lib{{MODULE_NAME}}.so"

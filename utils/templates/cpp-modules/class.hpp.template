@@ -1,0 +1,22 @@
+
+#ifndef {{CLASS_NAME_UPPER}}_HPP
+# define {{CLASS_NAME_UPPER}}_HPP
+
+# include "godot_includes.hpp"
+
+namespace godot
+{
+	class {{CLASS_NAME}} : public Node
+	{
+		GDCLASS({{CLASS_NAME}}, Node)
+
+		protected:
+			static void	_bind_methods();
+
+		public:
+			void	_init(); // optional constructor
+			String	hello();
+	};
+}
+
+#endif // {{CLASS_NAME_UPPER}}_HPP

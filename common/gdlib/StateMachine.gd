@@ -1,3 +1,5 @@
+# StateMachine.gd
+
 extends Node
 
 class_name StateMachine
@@ -25,3 +27,21 @@ func change_state(new_state: String):
 func _process(delta):
 	if current_state and states.has(current_state):
 		states[current_state]._process(delta)
+
+# func _ready():
+# 	for child in get_children():
+# 		if child is BaseState:
+# 			states[child.name] = child
+# 			child.state_machine = self
+# 			child._on_enter()
+
+# func change_state(state_name):
+# 	if current_state:
+# 		current_state._on_exit()
+# 	current_state = states.get(state_name, null)
+# 	if current_state:
+# 		current_state._on_enter()
+
+# func _process(delta):
+# 	if current_state:
+# 		current_state._on_update(delta)

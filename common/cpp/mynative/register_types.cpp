@@ -1,3 +1,4 @@
+// register_types.cpp
 
 #include <godot_cpp/godot.hpp>
 #include "MyNativeThing.hpp"

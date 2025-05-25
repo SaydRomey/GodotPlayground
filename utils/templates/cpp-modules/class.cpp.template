@@ -1,0 +1,19 @@
+
+#include "{{CLASS_NAME}}.hpp"
+
+using namespace godot;
+
+void {{CLASS_NAME}}::_bind_methods()
+{
+	ClassDB::bind_method(D_METHOD("hello"), &{{CLASS_NAME}}::hello);
+}
+
+void {{CLASS_NAME}}::_init()
+{
+	// Initialization here
+}
+
+String {{CLASS_NAME}}::hello()
+{
+	return ("Hello from C++!");
+}

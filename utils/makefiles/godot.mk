@@ -1,20 +1,7 @@
-
-# cd ~/GodotPlayground
-# ln -sf ../../../common/cpp/mynative/libmynative.so projects/testgame/native/libmynative.so
-
-# Explanation:
-# 	You’re in GodotPlayground/
-# 	You want the link in projects/testgame/native/
-# 	The relative path from projects/testgame/native/ → common/cpp/mynative/ is:
-# 	../../common/cpp/mynative/
-
-# Verify:
-# readlink -f projects/testgame/native/libmynative.so
-# 	This must now return the full absolute path like:
-# 	/home/sayd/GodotPlayground/common/cpp/mynative/libmynative.so
+# godot.mk
 
 # ==============================
-##@ 🎮 Godot
+##@ 🎮 Godot Project Management
 # ==============================
 
 PROJECTS_DIR	:= ./projects
@@ -35,28 +22,26 @@ gd-run: ## Launch a Godot project
 .PHONY: gd-new gd-delete gd-run
 
 # ==============================
-##@ 👾 Godot-CPP
+##@ 👾 Godot C++ Integration
 # ==============================
 
-CPP_ROOT := common/cpp
-GODOT_CPP_DIR := $(CPP_ROOT)/godot-cpp
-GODOT_CPP_BIN := $(GODOT_CPP_DIR)/bin
-GODOT_CPP_HEADERS := $(GODOT_CPP_DIR)/godot-headers
+CPP_ROOT			:= common/cpp
+GODOT_CPP_DIR		:= $(CPP_ROOT)/godot-cpp
 
-CPP_MODULES := $(filter-out $(GODOT_CPP_DIR),$(wildcard $(CPP_ROOT)/*))
-CPP_MODULE_NAMES := $(notdir $(CPP_MODULES))
+CPP_MODULES			:= $(filter-out $(GODOT_CPP_DIR),$(wildcard $(CPP_ROOT)/*))
+CPP_MODULE_NAMES	:= $(notdir $(CPP_MODULES))
 
 # Script path (also defined in scripts.mk)
-GD_CPP_NEW		:= utils/scripts/gd-cpp-new-module.sh
+GD_CPP_NEW			:= utils/scripts/gd-cpp-new-module.sh
 
-cpp: cpp-bindings cpp-build
+cpp: cpp-bindings cpp-build ## Build bindings and all C++ modules
 
-cpp-new:
+cpp-new: ## Create new C++ native module
 	@(call RUN_SCRIPT,cpp module,$(GD_CPP_NEW))
 
 cpp-bindings: ## Build godot-cpp bindings
 	@echo "[C++] Building godot-cpp bindings..."
-	cd $(GODOT_CPP_DIR) && scons platform=linux generate_bindings=yes -j$(nproc)
+	@cd $(GODOT_CPP_DIR) && scons platform=linux target=template_debug generate_bindings=yes -j$$(nproc)
 
 cpp-build: ## Build all native C++ modules
 	@for mod in $(CPP_MODULE_NAMES); do \
@@ -72,4 +57,20 @@ cpp-clean: ## Clean all compiled C++ modules
 
 cpp-re: cpp-clean cpp-build ## Clean and rebuild
 
-.PHONY: cpp cpp-bindings cpp-build cpp-clean
+cpp-status: ## Show available C++ modules and their contents
+	@for mod in $(CPP_MODULE_NAMES); do \
+		echo "[C++] Module: $$mod"; \
+		ls -lh $(CPP_ROOT)/$$mod; \
+	done
+
+cpp-gdextension-links: ## Regenerate .gdextension files for all modules
+	@for mod in $(CPP_MODULE_NAMES); do \
+		[ "$$mod" = "godot-cpp" ] && continue; \
+		echo "[GDExtension] Generating $$mod.gdextension"; \
+		sed \
+			-e "s/{{ENTRY_SYMBOL}}/$$mod_init/" \
+			-e "s/{{LIB_NAME}}/lib$$mod/" \
+			utils/templates/cpp-modules/template.gdextension > projects/testgame/native/$$mod.gdextension; \
+	done
+
+.PHONY: cpp cpp-bindings cpp-build cpp-clean cpp-re cpp-status cpp-gdextension-links

@@ -1,3 +1,4 @@
+# SConstruct
 import os
 
 env = Environment()
@@ -12,7 +13,6 @@ env.Append(CPPPATH=[
 	f"{GODOT_CPP}/gdextension"
 ])
 env.Append(LIBPATH=[f"{GODOT_CPP}/bin"])
-# env.Append(LINKFLAGS=[f"{GODOT_CPP}/bin/libgodot-cpp.linux.template_debug.x86_64.a"])
 env.Append(LINKFLAGS=[
     '-Wl,--whole-archive',
     f"{GODOT_CPP}/bin/libgodot-cpp.linux.template_debug.x86_64.a",

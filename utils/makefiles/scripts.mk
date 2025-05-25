@@ -15,7 +15,7 @@ GENERATE_ENV	:= $(SCRIPT_DIR)/generate-env.sh
 # Scripts Logs and Artifacts
 SCRIPT_LOG_DIR	:= ./utils/scripts/tmp_scripts_logs
 SCRIPT_LOG_FILE	:= $(SCRIPT_LOG_DIR)/SCRIPT_$(TIMESTAMP).log
-SCRIPT_ARTIFACTS	:= 
+# SCRIPT_ARTIFACTS	:= 
 
 # ==============================
 # Script Related Utilty Macros
@@ -58,6 +58,11 @@ define RUN_SCRIPT
 	fi
 endef
 
+# define RUN_SCRIPT_BASIC
+# echo "[RUN] $(1)..."; \
+# bash $(2)
+# endef
+
 # **************************************************************************** #
 
 run-script:
@@ -94,8 +99,10 @@ script: | $(SCRIPT_LOG_DIR) ## Interactive script selection menu
 	'
 
 script-clean: ## Clean up test artifacts and logs
-	@$(call CLEANUP,Scripts,script artifacts,$(SCRIPT_ARTIFACTS),"All scripts artifacts removed.","No artifacts to clean.")
-	@$(call CLEANUP,Scripts,script log files,$(SCRIPT_LOG_DIR),"Scripts logs removed.","No logs to remove.")
+	@if [ -d $(SCRIPT_LOG_DIR)]; then \
+		$(call CLEANUP,Scripts,script log files,$(SCRIPT_LOG_DIR),"Scripts logs removed.","No logs to remove."); \
+	fi
+#	@$(call CLEANUP,Scripts,script artifacts,$(SCRIPT_ARTIFACTS),"All scripts artifacts removed.","No artifacts to clean.")
 
 $(SCRIPT_LOG_DIR):
 	@$(MKDIR) $(SCRIPT_LOG_DIR)

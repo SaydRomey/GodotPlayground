@@ -41,6 +41,8 @@ tree-log: ## Logs file structure in TREE_OUTFILE
 	fi
 
 tree-clean: ## Remove 'tree' outfile
-	@$(call CLEANUP,TREE,'tree' output,$(TREE_OUTFILE))
+	@if [ -f $(TREE_OUTFILE) ]; then \
+		$(call CLEANUP,TREE,'tree' output,$(TREE_OUTFILE)); \
+	fi
 
 .PHONY: tree tree-log tree-cleen
