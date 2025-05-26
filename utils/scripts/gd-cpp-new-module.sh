@@ -33,7 +33,9 @@ declare -A templates=(
 	["class.hpp.template"]="${CLASS_NAME}.hpp"
 	["register_types.cpp.template"]="register_types.cpp"
 	["SConstruct.template"]="SConstruct"
-	["gdextension.template"]="${MOD_NAME}.gdextension"
+	["template.gdextension"]="${MOD_NAME}.gdextension"
+	# ["gdextension.template"]="${MOD_NAME}.gdextension"
+
 )
 
 for tpl in "${!templates[@]}"; do

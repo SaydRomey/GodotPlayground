@@ -37,7 +37,7 @@ GD_CPP_NEW			:= utils/scripts/gd-cpp-new-module.sh
 cpp: cpp-bindings cpp-build ## Build bindings and all C++ modules
 
 cpp-new: ## Create new C++ native module
-	@(call RUN_SCRIPT,cpp module,$(GD_CPP_NEW))
+	@$(call RUN_SCRIPT,cpp module,$(GD_CPP_NEW))
 
 cpp-bindings: ## Build godot-cpp bindings
 	@echo "[C++] Building godot-cpp bindings..."
@@ -73,4 +73,31 @@ cpp-gdextension-links: ## Regenerate .gdextension files for all modules
 			utils/templates/cpp-modules/template.gdextension > projects/testgame/native/$$mod.gdextension; \
 	done
 
-.PHONY: cpp cpp-bindings cpp-build cpp-clean cpp-re cpp-status cpp-gdextension-links
+# check: ## Verify all .gdextension files and .so links
+# 	@echo "[CHECK] Verifying native modules..."
+# 	@for mod in $(CPP_MODULE_NAMES); do \
+# 		[ "$$mod" = "godot-cpp" ] && continue; \
+# 		gdext="projects/testgame/native/$$mod.gdextension"; \
+# 		sofile="projects/testgame/native/lib$$mod.so"; \
+# 		if [ ! -f "$$gdext" ]; then \
+# 			echo "$(RED)Missing: $$gdext$(RESET)"; \
+# 		else \
+# 			grep -q "$$mod_init" "$$gdext" || echo "$(RED)Mismatch in: $$gdext (missing $$mod_init)$(RESET)"; \
+# 		fi; \
+# 		if [ ! -f "$$sofile" ]; then \
+# 			echo "$(RED)Missing: $$sofile$(RESET)"; \
+# 		fi; \
+# 	done
+
+# symlink-all: ## Create gdlib and native links for all projects
+# 	@for proj in $(shell ls -d projects/*/); do \
+# 		echo "Updating $$proj..."; \
+# 		ln -snf ../../common/gdlib $$proj/gdlib; \
+# 		mkdir -p $$proj/native; \
+# 		ln -snf ../../../common/cpp/mynative/libmynative.so $$proj/native/libmynative.so; \
+# 		if [ ! -f $$proj/native/native.gdextension ]; then \
+# 			cp utils/templates/native.gdextension.template $$proj/native/native.gdextension; \
+# 		fi; \
+# 	done
+
+.PHONY: cpp cpp-bindings cpp-build cpp-clean cpp-re cpp-status cpp-gdextension-links # check

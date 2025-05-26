@@ -72,8 +72,8 @@ run: gd-run ## gd-run
 # ##@ 🧹 Cleanup
 # # ==============================
 
-# clean: ## Remove object files
-# 	@$(MAKE) cpp-clean $(NPD)
+clean: ## Remove object files
+	@$(MAKE) cpp-clean $(NPD)
 
 fclean: clean ## Remove executable
 #	@$(call CLEANUP,$(NAME),executable,$(NAME))
