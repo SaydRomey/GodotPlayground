@@ -1,6 +1,8 @@
 #!/bin/bash
 # utils/scripts/gd-new-project.sh
 
+## TODO: maybe compile the cpp modules to be sure the .so are generated before running this script ?
+
 # set -e
 
 source "$(dirname "$0")/ansi_colors.sh"
@@ -24,7 +26,7 @@ echo -e "${GREEN}✔️  Initialized minimal Godot project.godot${NC}"
 echo "Symlinking gdlib..."
 ln -s ../../common/gdlib gdlib
 
-TEMPLATE_PATH=../../utils/templates/cpp-modules/template.gdextension
+TEMPLATE_PATH=../../utils/templates/cpp-modules/gdextension.template
 if [ ! -f "$TEMPLATE_PATH" ]; then
 	echo -e "${RED}Template not found: $TEMPLATE_PATH${NC}"
 	exit 1
@@ -41,7 +43,7 @@ for module_path in ../../common/cpp/*; do
 
 	# Link .so
 	if [ -f "$so_path" ]; then
-		ln -s "$so_path" "native/lib${module_name}.so"
+		ln -sf "$so_path" "native/lib${module_name}.so"
 	else
 		echo -e "${YELLOW}Warning: $so_path not found${NC}"
 	fi

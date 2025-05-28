@@ -22,7 +22,8 @@ include $(MK_PATH)/doc.mk			# Documentation Targets
 include $(MK_PATH)/env.mk			# .env File Management
 include $(MK_PATH)/class.mk			# CPP Class Creator
 include $(MK_PATH)/scripts.mk		# Scripts Management
-include $(MK_PATH)/godot.mk			# Goodot and C++ native
+include $(MK_PATH)/godot.mk			# Godot
+include $(MK_PATH)/godot-cpp.mk		# C++ native for Godot
 include $(MK_PATH)/tree.mk			# File structure output
 include $(MK_PATH)/misc.mk			# Miscellaneous Utilities
 include $(MK_PATH)/dependencies.mk	# 

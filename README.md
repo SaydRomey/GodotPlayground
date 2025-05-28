@@ -6,8 +6,27 @@ reusable GD scripts, and dev automation tools.
 
 ---
 
+## The idea
+
+Basically i wanted to learn how to use `C++` with `Godot`, 
+and gradually build a library of `gdscript` functions i keep rewriting in different projects 
+so it could be used by simply including the library.  
+And while i'm at it, why not try to automate it all...\
+So when this works properly, we should have some makefile commands to:
+- Start a new Godot project
+- Build a new `CPP` module
+- Add some functions to the `gdlib`
+- Link and sync everything up
+
+I'll be playing with scripts through makefiles, bash scripts and some templates with good ol' `sed`...\
+Let's see how this goes :)
+
 
 ## Setup
+
+> [!NOTE]
+> Most of this will be handled automatically with `makefile` targets...\
+> Like `make dep` or something, to check and install dependencies and submodules
 
 ### 1. Clone with submodules
 
@@ -55,14 +74,13 @@ ln -s ../../../common/cpp/mynative/libmynative.so native/libmynative.so
 ├── common
 │   ├── cpp
 │   │   ├── godot-cpp/               # Submodule: Godot C++ bindings
-│   │   └── mynative/                # Your native extension module
+│   │   └── mynative/                # Native extension module
 │   └── gdlib/                       # Shared GDScript modules
 ├── projects/
 │   ├── testgame/                    # Example Godot project
 │   │   ├── gdlib -> ../../common/gdlib
 │   │   └── native/
 │   │       └── libmynative.so -> ../../../common/cpp/mynative/libmynative.so
-│   └── todelete/                    # Scratch project folder
 ├── utils/
 │   ├── makefiles/                   # Modular Make targets
 │   ├── scripts/                     # CLI helpers (project, build, run)

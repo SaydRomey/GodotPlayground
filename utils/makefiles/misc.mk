@@ -75,3 +75,30 @@ welcome: ## what can i say
 	@$(PLAY_SOUND) $(WAV_WELCOME)
 
 .PHONY: pushit welcome
+
+
+# ==============================
+##@ 🧸 Assets
+# ==============================
+
+URL_1X1			:= https://shoonia.github.io/1x1
+
+# 3D models
+URL_SPACESHIPS	:= https://quaternius.com/packs/ultimatespaceships.html
+
+asset: ## Show asset-related links
+	@clear
+	@echo "Make a selection:"
+	@echo "\n$(ORANGE)Assets$(RESET)"
+	@echo "  0. 1x1 pixel generator"
+
+	@read url_choice; \
+	case $$url_choice in \
+		0) CHOICE=$(URL_1X1);; \
+		*) $(call ERROR,Invalid choice:,$$CHOICE, Exiting.); exit 1;; \
+	esac; \
+	$(OPEN) $$CHOICE
+	@clear
+	@$(call INFO,,Opening link...)
+
+.PHONY: asset

@@ -31,10 +31,10 @@ mkdir -p "$MODULE_DIR"
 declare -A templates=(
 	["class.cpp.template"]="${CLASS_NAME}.cpp"
 	["class.hpp.template"]="${CLASS_NAME}.hpp"
+	["gdextension.template"]="${MOD_NAME}.gdextension"
+	["godot_includes.hpp.template"]="godot_includes.hpp"
 	["register_types.cpp.template"]="register_types.cpp"
 	["SConstruct.template"]="SConstruct"
-	["template.gdextension"]="${MOD_NAME}.gdextension"
-	# ["gdextension.template"]="${MOD_NAME}.gdextension"
 
 )
 
@@ -55,7 +55,7 @@ for tpl in "${!templates[@]}"; do
 	echo -e "${GREEN}✔️  Generated: $dst${NC}"
 done
 
-# Create godot_includes.hpp if not already present
+# Create godot_includes.hpp if not already present (**might remove, now handled with template)
 INCLUDES_FILE="${MODULE_DIR}/godot_includes.hpp"
 if [ ! -f "$INCLUDES_FILE" ]; then
 	cat <<EOF > "$INCLUDES_FILE"
