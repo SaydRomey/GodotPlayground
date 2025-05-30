@@ -1,0 +1,38 @@
+[gd_scene load_steps=7 format=3 uid="uid://dg1c72ptcq2pa"]
+
+[ext_resource type="Texture2D" uid="uid://y01ll6wygb5d" path="res://panoramas/panorama1.jpg" id="1_c6rj5"]
+[ext_resource type="PackedScene" uid="uid://0n5j7dt232gk" path="res://scenes/Executioner.tscn" id="2_dtwn4"]
+[ext_resource type="Script" uid="uid://bm2tcy7tqndyp" path="res://scripts/camera_rig.gd" id="3_dtwn4"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_x2olr"]
+panorama = ExtResource("1_c6rj5")
+
+[sub_resource type="Sky" id="Sky_1gvwg"]
+sky_material = SubResource("PanoramaSkyMaterial_x2olr")
+
+[sub_resource type="Environment" id="Environment_n0118"]
+background_mode = 2
+background_energy_multiplier = 0.8
+sky = SubResource("Sky_1gvwg")
+glow_enabled = true
+glow_bloom = 0.2
+glow_blend_mode = 1
+adjustment_enabled = true
+adjustment_brightness = 1.05
+adjustment_contrast = 1.05
+adjustment_saturation = 1.3
+
+[node name="Space" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_n0118")
+
+[node name="Executioner" parent="." instance=ExtResource("2_dtwn4")]
+
+[node name="CameraRig" type="Node3D" parent="."]
+script = ExtResource("3_dtwn4")
+target_path = NodePath("../Executioner")
+
+[node name="Camera3D" type="Camera3D" parent="CameraRig"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 10)
+current = true

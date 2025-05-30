@@ -7,6 +7,7 @@
 URL_GODOT		:= https://docs.godotengine.org/en/stable/index.html
 URL_2D_GUIDE	:= https://www.gamedev.net/tutorials/programming/general-and-gameplay-programming/the-guide-to-implementing-2d-platformers-r2936/
 URL_KCC_CHAR	:= https://kidscancode.org/godot_recipes/4.x/2d/platform_character/index.html
+URL_STATE_MA	:= https://www.gdquest.com/tutorial/godot/design-patterns/finite-state-machine/
 
 doc: ## Show documentation links
 	@clear
@@ -15,12 +16,14 @@ doc: ## Show documentation links
 	@echo "  0. Godot Documentation"
 	@echo "  1. Guide to Implementing 2D Platformers"
 	@echo "  2. Platform Character"
+	@echo "  3. State Machine"
 
 	@read url_choice; \
 	case $$url_choice in \
 		0) CHOICE=$(URL_GODOT);; \
 		1) CHOICE=$(URL_2D_GUIDE);; \
 		2) CHOICE=$(URL_KCC_CHAR);; \
+		3) CHOICE=$(URL_STATE_MA);; \
 		*) $(call ERROR,Invalid choice:,$$CHOICE, Exiting.); exit 1;; \
 	esac; \
 	$(OPEN) $$CHOICE

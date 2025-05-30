@@ -64,7 +64,7 @@ repo: ## Open the GitHub repository
 
 all: help
 
-new: gd-new | env ## gd-run but depends on .env file
+new: gd-new | env ## gd-new but depends on .env file
 
 run: gd-run ## gd-run
 

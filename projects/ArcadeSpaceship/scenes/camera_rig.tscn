@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://c65pdhx7b6lvh"]
+
+[ext_resource type="Script" uid="uid://bm2tcy7tqndyp" path="res://scripts/camera_rig.gd" id="1_txy7i"]
+
+[node name="CameraRig" type="Node3D"]
+script = ExtResource("1_txy7i")
+target_path = NodePath("../Executioner")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 10)
+current = true
