@@ -2,4 +2,6 @@ change the scripts references and location to proper sub directories..
 
 make the main targets about compiling c++ code, linking .so, verification ect...
 
+do like with libft but produce the .so and call it from the main makefile and have a target to run 'make' to build the .so, then symlink it to new project
 
+** Create a makefileUtils repo, and use it as a submodule ?

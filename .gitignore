@@ -1,12 +1,16 @@
 # Godot 4+ specific ignores
 .godot/
 .nomedia
+/android/
 # *.uid
 
 # Godot-specific ignores
 .import/
 export.cfg
 export_credentials.cfg
+# export/
+# *.godot
+# *.import
 
 # Imported translations (automatically generated from CSV files)
 *.translation
@@ -16,8 +20,14 @@ export_credentials.cfg
 data_*/
 mono_crash.*.json
 
-# Editor configs
-.vscode
+# C++ build artifacts
+build/
+bin/
+lib/
+
+# godot-cpp build outputs
+extern/godot-cpp/bin/
+extern/godot-cpp/include/gen/
 
 # Build artifacts
 *.o
@@ -31,6 +41,10 @@ mono_crash.*.json
 
 # SCons build metadata
 .sconsign.dblite
+
+# Editor configs
+.vscode/
+*.log
 
 # Temporary files and directories
 **/tmp/

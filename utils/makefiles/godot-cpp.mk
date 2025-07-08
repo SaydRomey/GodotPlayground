@@ -49,7 +49,7 @@ cpp-gdextension-links: ## Regenerate .gdextension files for all modules
 		sed \
 			-e "s/{{ENTRY_SYMBOL}}/$$mod_init/" \
 			-e "s/{{LIB_NAME}}/lib$$mod/" \
-			utils/templates/cpp-modules/template.gdextension > projects/testgame/native/$$mod.gdextension; \
+			utils/templates/cpp-modules/gdextension.template > projects/BrunchPolice/$$mod.gdextension; \
 	done
 
 # check: ## Verify all .gdextension files and .so links
